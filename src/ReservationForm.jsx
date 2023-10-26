@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
 export default function ReservationForm() {
@@ -8,6 +8,34 @@ export default function ReservationForm() {
   const [smoking, setSmoking] = useState(false);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+
+  // console.table({ smoking });
+
+  // fetch("https://example.com/ciao").then(console.log).catch(console.error);
+
+  // useEffect(callback, dependencyArray)
+
+  // Primo parametro: callback
+  // La callback sarà eseguita ogni volta che uno dei valori
+  // dell'array delle dipendenze cambia, DOPO il rendering
+
+  // Secondo parametro: array delle dipendenze
+  // Specifichiamo in questo array quali sono i valori che
+  // monitoriamo: quando cambiano, eseguiamo la callback
+
+  console.table({ smoking });
+  useEffect(() => {
+    if (smoking) {
+      alert(`Smoking is bad for you`);
+    }
+  }, [smoking]);
+
+  // useEffect(() => {
+  //   console.log("Running useEffect 2...");
+  //   if (smoking) {
+  //     alert("Smoking is bad for you!");
+  //   }
+  // }, [smoking]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,6 +69,12 @@ export default function ReservationForm() {
 
   return (
     <Form onSubmit={handleSubmit}>
+      {/* <p>Count: {count}</p>
+      <button type="button" onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+
+    */}
       <Form.Group>
         <Form.Label>Name</Form.Label>
         <Form.Control
@@ -48,7 +82,6 @@ export default function ReservationForm() {
           placeholder="John Doe"
           value={name}
           onChange={(e) => {
-            // e.target.value
             setName(e.target.value);
           }}
         />
